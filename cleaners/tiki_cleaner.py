@@ -22,6 +22,7 @@ def process_search_page(raw_data):
             if data['@type'] == 'Product':
                 product_url = data['url']
                 product_id = re.findall('(?:p(\d*).html)', product_url)[0]
+                product_url = 'https://tiki.vn/p{}.html'.format(product_id)
                 row_list.append(
                     [
                         data['brand']['name'],  # brand_name
