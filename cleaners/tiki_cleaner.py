@@ -79,8 +79,8 @@ class TikiCleaner:
                 row_list.append(
                         [
                             # product_data['brand']['name'],                  # brand_name
-                            product_data['current_seller']['store_id'],     # seller_id
-                            product_data['current_seller']['name'],         # seller_name
+                            product_data['current_seller'].get('store_id'),     # seller_id
+                            product_data['current_seller'].get('name'),         # seller_name
                             product_data['id'],                             # product_id
                             product_data['name'],                           # product_name
                             product_data['stock_item']['qty'],              # stock
