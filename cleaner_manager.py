@@ -108,6 +108,7 @@ if __name__ == '__main__':
                     print('Parse successfully')
             else:
                 print('Get raw data error')
+                failed = False
         else:
             print('No database credential for this request')
 
