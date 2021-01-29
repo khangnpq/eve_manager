@@ -219,17 +219,17 @@ class TikiCleaner:
                     flash_sale['from_date'],                    # start_time
                     end_time,                                   # end_time
                     flash_sale['deal_id'],                      # id
-                    flash_sale['product']['sp_seller_id'],      # seller_id
-                    flash_sale['product']['sp_seller_name'],    # seller_name
-                    flash_sale['product']['master_id'],         # product_id
-                    flash_sale['product']['name'],              # product_name
+                    flash_sale['product'].get('sp_seller_id'),      # seller_id
+                    flash_sale['product'].get('sp_seller_name'),    # seller_name
+                    flash_sale['product'].get('master_id'),         # product_id
+                    flash_sale['product'].get('name'),              # product_name
                     product_url,                                # product_url
                     price_original,                             # price_original
                     price_sale,                                 # price_sale
                     discount,                                   # discount
-                    flash_sale['progress']['qty'],              # quantity
-                    flash_sale['progress']['qty_ordered'],      # sold
-                    flash_sale['progress']['qty_remain'],       # stock
+                    flash_sale['progress'].get('qty'),              # quantity
+                    flash_sale['progress'].get('qty_ordered'),      # sold
+                    flash_sale['progress'].get('qty_remain'),       # stock
                     record['data_key']                          # data_key
                     ]
                                   )
