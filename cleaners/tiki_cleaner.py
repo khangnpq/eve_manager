@@ -127,8 +127,8 @@ class TikiCleaner:
                     [
                     review['id'],                   # id
                     review_created_at,              # review_created_at
-                    review['seller']['id'],         # seller_id
-                    review['seller']['name'],       # seller_name
+                    # review['seller']['id'],         # seller_id
+                    # review['seller']['name'],       # seller_name
                     review['title'],                # title
                     review['content'],              # content
                     review['rating'],               # rating
@@ -143,8 +143,8 @@ class TikiCleaner:
                                 columns = [
                                         'id',
                                         'review_created_at',
-                                        'seller_id',
-                                        'seller_name',
+                                        # 'seller_id',
+                                        # 'seller_name',
                                         'title',
                                         'content',
                                         'rating',
