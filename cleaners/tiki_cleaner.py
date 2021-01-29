@@ -66,11 +66,11 @@ class TikiCleaner:
         for _, record in self.raw_data.iterrows():
             data = record['data']
             if len(re.findall(r'defaultProduct\s=\s({.*});', data)) > 0: 
-                print("defaultProduct")
+                # print("defaultProduct")
                 product_extract = re.findall(r'defaultProduct\s=\s({.*});', data)
                 product_data = json.loads(product_extract[0]) 
             elif len(re.findall(r"(?:__NEXT_DATA__ = )(\{.*\});", data)) > 0 :
-                print("__NEXT_DATA__") 
+                # print("__NEXT_DATA__") 
                 product_extract = re.findall(r"(?:__NEXT_DATA__ = )(\{.*\});", data) 
                 product_data = json.loads(product_extract[0]) 
                 product_data = product_data["props"]["initialState"]["desktop"]["product"]["data"] 
