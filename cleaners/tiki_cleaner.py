@@ -25,7 +25,7 @@ def process_search_page(raw_data):
                 product_url = 'https://tiki.vn/p{}.html'.format(product_id)
                 row_list.append(
                     [
-                        data['brand']['name'],  # brand_name
+                        # data['brand']['name'],  # brand_name
                         product_id,             # product_id
                         data['name'],           # product_name
                         product_url,            # product_url
@@ -35,7 +35,7 @@ def process_search_page(raw_data):
     return pd.DataFrame(
                         row_list, 
                         columns=[
-                                'brand_name',
+                                # 'brand_name',
                                 'product_id',
                                 'product_name',
                                 'product_url',
@@ -55,7 +55,7 @@ class TikiCleaner:
         right_df = process_search_page(self.raw_data)
         result = cleaned_data.merge(
                                     right_df,
-                                    on=['brand_name','data_key'], 
+                                    on=['data_key'], 
                                     how='inner'
                                     )
         return result.drop_duplicates(subset=['product_url'])
@@ -79,8 +79,8 @@ class TikiCleaner:
                 row_list.append(
                         [
                             # product_data['brand']['name'],                  # brand_name
-                            product_data['current_seller'].get('store_id'),     # seller_id
-                            product_data['current_seller'].get('name'),         # seller_name
+                            product_data.get('current_seller', {}).get('store_id'),     # seller_id
+                            product_data.get('current_seller', {}).get('name'),         # seller_name
                             product_data['id'],                             # product_id
                             product_data['name'],                           # product_name
                             product_data['stock_item']['qty'],              # stock
@@ -168,15 +168,17 @@ class TikiCleaner:
             for product in data:
                 row_list.append(
                         [
-                            product['id'],                             # product_id
-                            product['name'],                           # product_name
-                            product['stock_item']['qty'],              # stock
-                            record['data_key']                         # data_key
+                            product['brand']['name'],            # brand_name
+                            product['id'],                       # product_id
+                            product['name'],                     # product_name
+                            product['stock_item']['qty'],        # stock
+                            record['data_key']                   # data_key
                         ]
                                 )
         right_df = pd.DataFrame(
                                 row_list,
                                 columns = [
+                                        'brand_name'
                                         'product_id',
                                         'product_name',
                                         'stock',
