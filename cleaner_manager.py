@@ -36,11 +36,11 @@ def clean_data(engine, clean_request, raw_data):
         if clean_request['table'] == 'tiki_brand_search' and len(cleaned_data) > 0:
             old_cleaned_data = get_old_data(engine, 'cleaned_data', 'fcv_brand_search')
             try:
-                old_cleaned_data.drop(['created_at', 'platform', 'venture', 
-                                        'page', 'data_key', 'cat', 'is_active',
-                                        'product_id', 'product_name'], axis=1, inplace=True)
                 if len(old_cleaned_data):
-                    result = old_cleaned_data.merge(cleaned_data, on=['brand_name', 'product_url'], how='outer', indicator='is_active')
+                    old_cleaned_data['is_active'] = 0
+                    cleaned_data['is_active'] = 1
+                    result = pd.concat([old_cleaned_data,cleaned_data]).drop_duplicates(subset='product_url', keep="last")
+                    # result = old_cleaned_data.merge(cleaned_data, on=['brand_name', 'product_url'], how='outer', indicator='is_active')
                     result['is_active'] = result['is_active'].map(mapping)
                 else:
                     result = cleaned_data

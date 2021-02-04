@@ -58,7 +58,7 @@ class TikiCleaner:
                                     on=['data_key'], 
                                     how='inner'
                                     )
-        return result.drop_duplicates(subset=['product_url'])
+        return result.drop_duplicates(subset=['product_url'], keep="last")
     
     def tiki_product_info_v1(self):
         row_list = []
