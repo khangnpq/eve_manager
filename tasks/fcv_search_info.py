@@ -33,7 +33,6 @@ def fcv_search_info(engine):
                         "schema": "raw_data",
                         "table": "{}_search_info_v1".format('tiki'),
                         "keyword": product['keyword'],
-                        "brand_name": product['brand_name'],
                         "search_type": product['search_type'],
                         "priority": product['priority'],
                         "page": page,
