@@ -95,7 +95,11 @@ if __name__ == '__main__':
             engine = sa.create_engine('{}://{}:{}@{}:{}/{}'.format(*db_auth.values()))
             raw_data = get_raw_data(engine, clean_request['schema'], clean_request['table'])
             if len(raw_data):
-                cleaned_data = clean_data(engine, clean_request, raw_data)
+                try:
+                    cleaned_data = clean_data(engine, clean_request, raw_data)
+                except Exception as e:
+                    print(traceback.format_exc())
+                    failed = True
                 if len(cleaned_data):
                     cleaned_data.to_sql(
                                         raw_clean_map[clean_request['table']], 
