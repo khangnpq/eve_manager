@@ -165,14 +165,15 @@ class TikiCleaner:
         cleaned_data = self.raw_data.drop('data', axis=1)
         for _, record in self.raw_data.iterrows(): 
             data = json.loads(record['data'])['data']
+            brand_name = product.get('brand', {}).get('name') or product.get('brand_name')
             for product in data:
                 row_list.append(
                         [
-                            product['brand']['name'],            # brand_name
-                            product['id'],                       # product_id
-                            product['name'],                     # product_name
-                            product['stock_item']['qty'],        # stock
-                            record['data_key']                   # data_key
+                            brand_name,                     # brand_name
+                            product['id'],                  # product_id
+                            product['name'],                # product_name
+                            product['stock_item']['qty'],   # stock
+                            record['data_key']              # data_key
                         ]
                                 )
         right_df = pd.DataFrame(
